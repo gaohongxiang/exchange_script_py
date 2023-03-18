@@ -85,9 +85,9 @@ class BinanceUtil():
             # print(token_price)
             if token_price <float(price):
                 content = symbol+"价格已跌破"+str(price)+"，最新成交价："+str(token_price)
-                send_msg = dingding_notice(content)
-                print(send_msg)
-            break
+                print(content)
+                dingding_notice(content)
+                break
             time.sleep(time_)     
 
     @try_except_code

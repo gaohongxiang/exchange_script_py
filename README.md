@@ -28,7 +28,7 @@ exchange_script
     formatdata.py # 格式化地址文件
     README.md # 说明文档
     .gitignore # git版本控制系统文件，敏感数据不上传
-    utils
+    utils_
         onepassword.py  # 1Password文件
         utils.py # 功能性文件
     data
@@ -85,11 +85,12 @@ api数据属于敏感数据，肯定需要加密存储，最好是不存储在�
 
 本代码使用方案3，流程如下
 
-1、根据文档安装1password GUI（图形用户界面、客户端）、1password CLI（命令行界面），连接两者，开启指纹。(1password文档：https://developer.1password.com/docs/cli/secrets-config-files)
+1、根据文档安装1password GUI（图形用户界面、客户端）、1password CLI（命令行界面），连接两者，开启指纹。
+- 1password文档：https://developer.1password.com/docs/cli/secrets-config-files
 
 2、1password客户端创建一个保险库，存入自己的api数据。
-    - 路径`<vault-name>/<item-name>[/<section-name>]/<file-name>`
-    - 我的`<Blockchain>/<binance>|<okx>/<gaohongxiang69_gmail.com-main>/<api_key>` @特殊字符好像不支持，我换成了_。无所谓，自己知道就好
+- 路径`<vault-name>/<item-name>[/<section-name>]/<file-name>`
+- 我的`<Blockchain>/<binance>|<okx>/<gaohongxiang69_gmail.com-main>/<api_key>` @特殊字符好像不支持，我换成了_。无所谓，自己知道就好
 
 3、配置文件
 

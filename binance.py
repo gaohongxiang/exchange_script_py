@@ -234,13 +234,14 @@ class BinanceUtil():
             params = {"type": "ISOLATEDMARGIN_ISOLATEDMARGIN", "fromSymbol": from_symbol, "toSymbol": to_symbol} # 逐仓杠杆账户转到逐仓杠杆账户
             self.binance.transfer(coin, amount, fromAccount=from_account, toAccount=to_account, params = params)
         elif from_account in ['spot', 'main'] and to_account == 'isolated_margin':
-            # 现货账户转到逐仓杠杆账户.万向划转不支持现货和逐仓账户之间划转.调用杠杆逐仓账户划转端口
+            # 现货账户转到逐仓杠杆账户
+            #万向划转不支持现货和逐仓账户之间划转.调用杠杆逐仓账户划转端口
             # POST /sapi/v1/margin/isoated/transfer (HMAC SHA256)
-            self.binance.sapi_post_margin_isolated_transfer(params={'asset': coin,'symbol': to_symbol, 'transFrom': 'ISOLATED_MARGIN', 'transTo': 'SPOT', 'amount': amount})
+            self.binance.sapi_post_margin_isolated_transfer(params={'asset': coin,'symbol': to_symbol, 'transFrom': 'SPOT', 'transTo': 'ISOLATED_MARGIN', 'amount': amount})
         elif from_account == 'isolated_margin' and to_account in ['spot', 'main']:
             # 逐仓杠杆账户转到现货账户
             # POST /sapi/v1/margin/isoated/transfer (HMAC SHA256)
-            self.binance.sapi_post_margin_isolated_transfer(params={'asset': coin,'symbol': from_symbol, 'transFrom': 'SPOT', 'transTo': 'ISOLATED_MARGIN', 'amount': amount})
+            self.binance.sapi_post_margin_isolated_transfer(params={'asset': coin,'symbol': from_symbol, 'transFrom': 'ISOLATED_MARGIN', 'transTo': 'SPOT', 'amount': amount})
         print(f"划转方向: {from_account}账户 -> {to_account}账户\n划转币种: {coin}\n划转数量: {amount}")
     
     @try_except_code

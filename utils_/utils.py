@@ -98,3 +98,7 @@ def is_valid_address(address):
         
 if __name__ == '__main__':
 
+    print(is_valid_contact('13512345678'))  # 输出 True
+    print(is_valid_contact('test@example.com'))  # 输出 True
+    print(is_valid_contact('invalid_contact'))  # 输出 False
+    print(is_valid_address('0x85C2e939D0261d587402E4D29b5e75AF0Afa4E9F'))  # 输出 True

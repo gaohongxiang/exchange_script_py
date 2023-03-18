@@ -67,7 +67,7 @@ class BinanceUtil():
         return binance
 
     @try_except_code
-    def last_price(self, symbol, price):
+    def last_price(self, symbol, price, time_):
         """价格预警
 
         ccxt统一api: 
@@ -76,21 +76,19 @@ class BinanceUtil():
         Attributes:
             symbol:交易对。例:IMX/USDT
             price:预警价格
+            time_:间隔时间
         """
         while True:
-            try:
-                symbol = symbol.upper()
-                ticker = self.binance.fetch_ticker(symbol)
-                token_price =float(ticker['last'])# 币安最新成交价
-                # print(token_price)
-                if token_price <float(price):
-                    content = symbol+"价格已跌破"+str(price)+"，最新成交价："+str(token_price)
-                    send_msg = self.dingding_notice(content)
-                    print(send_msg)
-                break
-                time.sleep(3)
-            except Exception as e:
-                print('钉钉发送失败', e)
+            symbol = symbol.upper()
+            ticker = self.binance.fetch_ticker(symbol)
+            token_price =float(ticker['last'])# 币安最新成交价
+            # print(token_price)
+            if token_price <float(price):
+                content = symbol+"价格已跌破"+str(price)+"，最新成交价："+str(token_price)
+                send_msg = dingding_notice(content)
+                print(send_msg)
+            break
+            time.sleep(time_)     
 
     @try_except_code
     def fetch_balance(self, coin):

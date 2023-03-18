@@ -1,5 +1,5 @@
 import subprocess, json
-from utils.utils import *
+from utils_.utils import try_except_code
 
 @try_except_code
 def parse_file(file_):

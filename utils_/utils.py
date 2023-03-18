@@ -1,4 +1,6 @@
-import sys, traceback, requests, re
+import os, sys, traceback, requests, re
+sys.path.append(os.getcwd()) # 根目录
+from config import ROBOTID
 
 def try_except_code(function):
     """处理python的异常,以及requests请求异常。在需要的函数名前面使用装饰器语法@try_except_code调用
@@ -50,6 +52,18 @@ def try_except_code(function):
         return result
     return wrapper
 
+@try_except_code
+def dingding_notice(content, robot_id=ROBOTID):
+    """钉钉提醒"""
+    url = f'https://oapi.dingtalk.com/robot/send?access_token={robot_id}'
+    msg = {
+            "msgtype": "text",
+            "text": {"content": content}
+        }
+    headers = {"Content-Type": "application/json;charset=utf-8"}
+    response = requests.post(url=url,json=msg,headers=headers,timeout=10).json()
+    return response
+
 def is_valid_contact(contact):
     """判断手机号或邮箱地址是否有效"""
     phone_pattern = r'^1[3-9]\d{9}$'
@@ -84,11 +98,3 @@ def is_valid_address(address):
         
 if __name__ == '__main__':
 
-    contact1 = '13512345678'
-    contact2 = 'test@example.com'
-    contact3 = 'invalid_contact'
-    print(is_valid_contact(contact1))  # 输出 True
-    print(is_valid_contact(contact2))  # 输出 True
-    print(is_valid_contact(contact3))  # 输出 False
-
-    print(is_valid_address('0x85C2e939D0261d587402E4D29b5e75AF0Afa4E9F'))  # 输出 False

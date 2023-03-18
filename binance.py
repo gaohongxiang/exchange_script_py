@@ -1,3 +1,7 @@
+"""
+binance api文档:https://binance-docs.github.io/apidocs/spot/cn/#45fa4e00db
+ccxt文档: https://docs.ccxt.com/en/latest/index.html
+"""
 import sys, os, requests, json, random, re
 from decimal import Decimal
 import ccxt
